@@ -32,6 +32,8 @@ public class StateCensusAnalyser {
 			String[] record;
 			record = reader.readNext();
 			//reads one line at a time 
+			if (!checkHeader(record))
+				throw new InvalidFile(" This is an invalid header");
 			while ((record = reader.readNext()) != null) {
 				if (record.length != 4) 
 					//custom exception for invalid delimiter
@@ -62,6 +64,16 @@ public class StateCensusAnalyser {
 		if (censusData.size() == 29)
 			return true;
 		return false;
+	}
+	
+	/**
+	 *  Method to check header if incorrect
+	 * @param record - We will pass the each record
+	 * @return -  return true or false
+	 */
+	public boolean checkHeader(String[] record) {
+		return (record[0].compareTo("State") + record[1].compareTo("Population") + record[2].compareTo("AreaInSqKm")
+				+ record[3].compareTo("DensityPerSqKm") == 0);
 	}
 
 }
