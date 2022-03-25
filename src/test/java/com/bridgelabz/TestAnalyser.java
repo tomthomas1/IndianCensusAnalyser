@@ -1,5 +1,8 @@
 package com.bridgelabz;
+import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+
 
 /**
  * We have written the test cases here.
@@ -7,9 +10,16 @@ import org.junit.Test;
  *
  */
 public class TestAnalyser {
+	StateCensusAnalyser analyser;
+
+	@Before
+	public void initialization() {
+		analyser = new StateCensusAnalyser();
+	}
+
 	@Test
-	public void testCensusAnalyser() {
-		StateCensusAnalyser analyser = new StateCensusAnalyser();
+	public void testRecordMatch() {
 		analyser.loadData();
+		assertEquals(true, analyser.checkData());
 	}
 }
