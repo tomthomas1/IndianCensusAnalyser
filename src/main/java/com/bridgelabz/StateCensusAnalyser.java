@@ -17,11 +17,12 @@ public class StateCensusAnalyser {
 	ArrayList<CSVStateCensus> censusData = new ArrayList<CSVStateCensus>();
 
 	/**
-	 * [1] Method to load the data and display as csv
+	 * [1] Method to load the data and display
 	 * 1. The CSVReader class is used to read a CSV file. The class provides CSVReader class constructor to parse a CSV file.
 	 * 2. We are using a while loop to read the file line by line.
 	 * 3. We are adding the data to the list.
 	 * 4. Then we are using a advanced for loop to display the list.
+	 * 5. We are throwing the custom exception
 	 */
 	public void loadData(String filePath) throws InvalidFile { 
 
@@ -37,7 +38,7 @@ public class StateCensusAnalyser {
 			}
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			//Throws Invalid file exception
 			throw new InvalidFile(" This was an invalid File");
 		} catch (CsvValidationException e) {
 			// TODO Auto-generated catch block
@@ -45,6 +46,8 @@ public class StateCensusAnalyser {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}  catch (NumberFormatException e) {
+			throw new InvalidFile(" This record had an invalid type ");
 		}
 	}
 
