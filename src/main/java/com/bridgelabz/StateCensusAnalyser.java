@@ -24,7 +24,7 @@ public class StateCensusAnalyser {
 	 * 4. Then we are using a advanced for loop to display the list.
 	 * 5. We are throwing the custom exception
 	 */
-	public void loadData(String filePath) throws InvalidFile { 
+	public void loadData(String filePath) throws InvalidFile, InvalidDelimiter { 
 
 		try {
 			//parsing a CSV file into CSVReader class constructor  
@@ -33,6 +33,9 @@ public class StateCensusAnalyser {
 			record = reader.readNext();
 			//reads one line at a time 
 			while ((record = reader.readNext()) != null) {
+				if (record.length != 4) 
+					//custom exception for invalid delimiter
+					throw new InvalidDelimiter();
 				censusData.add(new CSVStateCensus(record[0], Long.parseLong(record[1]), Integer.parseInt(record[2]),
 						Double.parseDouble(record[3])));
 			}
