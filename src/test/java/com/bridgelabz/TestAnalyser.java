@@ -18,8 +18,12 @@ public class TestAnalyser {
 	}
 
 	@Test
-	public void testRecordMatch() {
-		analyser.loadData();
+	public void testRecordMatch() throws InvalidFile {
+		analyser.loadData("src/main/resources/IndiaStateCensusData.csv");
 		assertEquals(true, analyser.checkData());
+	}
+	@Test
+	public void testFileCheckSad() throws InvalidFile {
+		analyser.loadData("src/main/resources/IndiaStateCensus.csv");
 	}
 }
