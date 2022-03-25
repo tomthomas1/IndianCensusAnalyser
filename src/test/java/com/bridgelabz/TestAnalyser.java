@@ -11,10 +11,11 @@ import static org.junit.Assert.assertEquals;
  */
 public class TestAnalyser {
 	StateCensusAnalyser analyser;
-
+	CSVStateCode codeAnalyser;
 	@Before
 	public void initialization() {
 		analyser = new StateCensusAnalyser();
+		codeAnalyser = new CSVStateCode();
 	}
 
 	@Test
@@ -40,5 +41,11 @@ public class TestAnalyser {
 	@Test
 	public void testHeaderCheckSad() throws InvalidFile, InvalidDelimiter {
 		analyser.loadData("src/main/resources/IndiaStateCensusData.csv");
+	}
+	
+	@Test
+	public void testCodeRecordMatch() throws Exception {
+		codeAnalyser.loadData("src/main/resources/IndiaStateCode.csv");
+		assertEquals(true, codeAnalyser.checkData(37));
 	}
 }
